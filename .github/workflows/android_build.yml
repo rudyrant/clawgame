@@ -29,6 +29,15 @@ jobs:
           mv templates/* ~/.local/share/godot/export_templates/4.2.1.stable/
           rm Godot_v4.2.1-stable_export_templates.tpz
 
+      - name: Create debug keystore
+        run: |
+          mkdir -p ~/.android
+          keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: Update export presets for CI
+        run: |
+          sed -i 's|release/user_keystore="/home/rudyrant/.android/debug.keystore"|release/user_keystore="/root/.android/debug.keystore"|' export_presets.cfg
+
       - name: Export Android
         run: |
           mkdir -v -p build/android
