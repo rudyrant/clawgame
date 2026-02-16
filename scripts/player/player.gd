@@ -41,8 +41,14 @@ func _physics_process(_delta):
 
 func _on_hit_pressed():
 	print("Hit pressed")
-	# Implement hit logic here
+	var targets = $InteractionArea.get_overlapping_bodies()
+	for target in targets:
+		if target.has_method("hit"):
+			target.hit(1)
 
 func _on_interact_pressed():
 	print("Interact pressed")
-	# Implement interact logic here
+	var targets = $InteractionArea.get_overlapping_bodies()
+	for target in targets:
+		if target.has_method("interact"):
+			target.interact()

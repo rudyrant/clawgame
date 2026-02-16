@@ -10,5 +10,5 @@ func hit(damage: int):
 		die()
 
 func die():
-	# Future: Drop items
+	InventoryManager.add_item("Wood", 1)
 	queue_free()
