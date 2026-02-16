@@ -37,12 +37,12 @@ jobs:
       - name: Update export presets for CI
         run: |
           sed -i 's|release/user_keystore="/home/rudyrant/.android/debug.keystore"|release/user_keystore="/root/.android/debug.keystore"|' export_presets.cfg
+          sed -i 's|debug/keystore="/home/rudyrant/.android/debug.keystore"|debug/keystore="/root/.android/debug.keystore"|' export_presets.cfg
 
       - name: Export Android
         run: |
           mkdir -v -p build/android
           godot --headless --path . --export-debug "Android" build/android/clawgame.apk
-          ls -R build/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
