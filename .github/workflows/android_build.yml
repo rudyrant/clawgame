@@ -21,6 +21,14 @@ jobs:
           mkdir -p ~/.android
           touch ~/.android/repositories.cfg
 
+      - name: Download Godot Templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/4.2.1.stable
+          wget https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_export_templates.tpz
+          unzip Godot_v4.2.1-stable_export_templates.tpz
+          mv templates/* ~/.local/share/godot/export_templates/4.2.1.stable/
+          rm Godot_v4.2.1-stable_export_templates.tpz
+
       - name: Export Android
         run: |
           mkdir -v -p build/android
