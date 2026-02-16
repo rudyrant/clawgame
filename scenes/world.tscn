@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8y4q6x3y2w5e"]
+[gd_scene load_steps=5 format=3 uid="uid://b8y4q6x3y2w5e"]
 
 [ext_resource type="Script" path="res://scripts/world_manager.gd" id="1_script"]
 [ext_resource type="TileSet" uid="uid://d1g4r5v8x7j2b" path="res://assets/main_tileset.tres" id="2_tileset"]
+[ext_resource type="PackedScene" uid="uid://b8p8y8y8y8y8y" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" uid="uid://c6u7y8i9o0p1q" path="res://scenes/ui.tscn" id="4_ui"]
 
 [node name="World" type="Node2D"]
 
@@ -11,3 +13,8 @@ format = 2
 
 [node name="WorldManager" type="Node" parent="."]
 script = ExtResource("1_script")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(576, 324)
+
+[node name="UI" parent="." instance=ExtResource("4_ui")]
