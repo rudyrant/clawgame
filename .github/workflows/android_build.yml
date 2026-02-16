@@ -1,0 +1,27 @@
+name: "godot-android-export"
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  export-android:
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.2.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Android SDK
+        run: |
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
+
+      - name: Export Android
+        run: |
+          mkdir -v -p build/android
+          godot --headless --path clawgame/ --export-release "Android" ../build/android/clawgame.apk
