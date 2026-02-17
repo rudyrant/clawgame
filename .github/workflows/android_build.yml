@@ -42,10 +42,12 @@ jobs:
       - name: Export Android
         run: |
           mkdir -v -p build/android
-          godot --headless --path . --export-debug "Android" build/android/clawgame.apk
+          godot --headless --verbose --path . --export-debug "Android" build/android/clawgame.apk
+          ls -R build/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
+        if: success()
         with:
           name: clawgame-apk
-          path: build/android/clawgame.apk
+          path: build/android/*.apk
