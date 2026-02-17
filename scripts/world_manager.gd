@@ -4,6 +4,7 @@ extends Node
 @export var map_height = 128
 @export var noise_scale = 15.0
 @export var tree_scene: PackedScene = preload("res://prefabs/world/tree.tscn")
+@export var bush_scene: PackedScene = preload("res://prefabs/world/bush.tscn")
 
 var noise = FastNoiseLite.new()
 
@@ -30,8 +31,16 @@ func generate_world():
 	print("World generation complete: ", map_width, "x", map_height)
 
 func spawn_objects():
+	# Trees
 	for i in range(100):
 		var pos = Vector2(randf_range(0, map_width * 16), randf_range(0, map_height * 16))
 		var tree = tree_scene.instantiate()
 		tree.position = pos
 		add_child(tree)
+	
+	# Bushes
+	for i in range(50):
+		var pos = Vector2(randf_range(0, map_width * 16), randf_range(0, map_height * 16))
+		var bush = bush_scene.instantiate()
+		bush.position = pos
+		add_child(bush)
