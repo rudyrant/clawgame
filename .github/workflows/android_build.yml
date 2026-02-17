@@ -31,13 +31,13 @@ jobs:
 
       - name: Create debug keystore
         run: |
-          mkdir -p ~/.android
-          keytool -genkey -v -keystore ~/.android/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
       - name: Update export presets for CI
         run: |
-          sed -i 's|release/user_keystore="/home/rudyrant/.android/debug.keystore"|release/user_keystore="/root/.android/debug.keystore"|' export_presets.cfg
-          sed -i 's|debug/keystore="/home/rudyrant/.android/debug.keystore"|debug/keystore="/root/.android/debug.keystore"|' export_presets.cfg
+          # Replace any existing keystore path with the local one
+          sed -i 's|debug/keystore=.*|debug/keystore="debug.keystore"|' export_presets.cfg
+          sed -i 's|release/user_keystore=.*|release/user_keystore="debug.keystore"|' export_presets.cfg
 
       - name: Export Android
         run: |
